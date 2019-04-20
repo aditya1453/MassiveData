@@ -14,21 +14,28 @@ def main(output_filepath):
         cleaned data ready to be analyzed (saved in ../processed).
     """
     logger = logging.getLogger(__name__)
-    logger.info('Getting data from web')   
-    
-    urls  = ["https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data/downloads/GlobalLandTemperaturesByMajorCity.csv/2", 
-             "https://www.kaggle.com/carrie1/ecommerce-data/downloads/ecommerce-data.zip/1"
-             ]
-             
-    files = ['GlobalLandTemperaturesByMajorCity.csv', 
-             'ecommerce-data.zip']
+    logger.info('Getting data from web')
 
-    for i in range (len(files)):
-        r = requests.get(urls[i], stream=True)
+    # https://github.com/aditya1453/MassiveData/blob/master/GlobalLandTemperaturesByMajorCity.csv.zip
+    # https://github.com/aditya1453/MassiveData/blob/master/ecommerce-data.zip
+    # http://codeandbeer.org/virtual/BigData/Datasets/measures.tgz
+
+    # baseurl = 'http://codeandbeer.org/virtual/BigData/Datasets'
+    
+    # files   = ['measures.tgz']
+    baseurl = 'https://github.com/aditya1453/MassiveData/blob/master'
+    files = ['GlobalLandTemperaturesByMajorCity.csv.zip', 'ecommerce-data.zip']
+                # https://github.com/aditya1453/MassiveData/blob/master/ecommerce-data.zip?raw=true
+
+    for filename in files:
+        r = requests.get(baseurl+"/"+filename+"?raw=true", stream=True)
         if r.status_code == 200:
-            with open(output_filepath+"/"+files[i], "wb") as f:
+            print("Processing ... ") 
+            with open(output_filepath+"/"+filename, "wb") as f:
                 r.raw.decode_content = True
                 shutil.copyfileobj(r.raw, f)
+        else :
+            print("Request Error")
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
