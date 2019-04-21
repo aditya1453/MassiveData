@@ -1,7 +1,12 @@
 project2
 ==============================
 
-massive data
+Massive Data
+
+This Project created by:
+1. Widya Meiriska
+2. Yudi Aditya
+3. Eduardo
 
 Project Organization
 ------------
