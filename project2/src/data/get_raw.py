@@ -18,14 +18,9 @@ def main(output_filepath):
 
     # https://github.com/aditya1453/MassiveData/blob/master/GlobalLandTemperaturesByMajorCity.csv.zip
     # https://github.com/aditya1453/MassiveData/blob/master/ecommerce-data.zip
-    # http://codeandbeer.org/virtual/BigData/Datasets/measures.tgz
-
-    # baseurl = 'http://codeandbeer.org/virtual/BigData/Datasets'
     
-    # files   = ['measures.tgz']
     baseurl = 'https://github.com/aditya1453/MassiveData/blob/master'
     files = ['GlobalLandTemperaturesByMajorCity.csv.zip', 'ecommerce-data.zip']
-                # https://github.com/aditya1453/MassiveData/blob/master/ecommerce-data.zip?raw=true
 
     for filename in files:
         r = requests.get(baseurl+"/"+filename+"?raw=true", stream=True)
